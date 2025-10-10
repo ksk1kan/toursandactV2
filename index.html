@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fethiye Lovers - Tur ve Aktivitelerimiz</title>
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f8f8; color: #333; transition: background-color 0.3s, color 0.3s; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 1rem; background-color: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    h1 { font-size: 1.5rem; color: #c00; margin: 0.5rem 0; text-align: center; }
+    .controls { display: flex; align-items: center; gap: 1rem; }
+    .language-select, .theme-toggle { padding: 0.5rem; font-size: 1rem; }
+    .card { display: flex; flex-direction: row; align-items: center; gap: 1rem; padding: 1rem; border-bottom: 1px solid #ddd; }
+    .card img { width: 100px; height: 70px; object-fit: cover; border-radius: 8px; }
+    .card-content { flex: 1; }
+    .card-content h3 { margin: 0 0 .25rem; font-size: 1.05rem; }
+    .card-content h3 a { color: inherit; text-decoration: none; border-bottom: 1px dashed transparent; }
+    .card-content h3 a:hover, .card-content h3 a:focus { border-bottom-color: currentColor; outline: none; }
+    .price { font-weight: bold; font-size: 1.2rem; color: #c00; }
+
+    /* WhatsApp butonu */
+    .wa-btn {
+      display: inline-block;
+      margin-top: .5rem;
+      padding: .5rem .75rem;
+      border-radius: 8px;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-size: .95rem;
+      line-height: 1;
+      border: 0;
+      cursor: pointer;
+    }
+    .wa-btn:hover, .wa-btn:focus { filter: brightness(0.95); outline: none; }
+
+    @media(max-width: 768px) { .card { flex-direction: column; align-items: flex-start; } .card img { width: 100%; height: auto; } }
+    body.dark { background-color: #222; color: #eee; }
+    body.dark header { background-color: #333; }
+    body.dark .card { border-color: #444; }
+    body.dark .price { color: #ff8080; }
+    body.dark .wa-btn { color: #fff; } /* koyu modda da okunaklı */
+  </style>
+  <link rel="manifest" href="manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <div style="text-align: center; width: 100%;">
+      <a href="https://fethiyelovers.com/" target="_blank" rel="noopener noreferrer" aria-label="Fethiye Lovers web sitesi">
+        <img src="logo.png" alt="Fethiye Lovers Logo" style="height: 60px; display: block; margin: 0 auto;" />
+      </a>
+      <h1 id="title">TUR VE AKTİVİTELERİMİZ</h1>
+    </div>
+    <div class="controls">
+      <select id="language" class="language-select">
+        <option value="tr">🇹🇷 Türkçe</option>
+        <option value="en">🇬🇧 English</option>
+        <option value="ru">🇷🇺 Русский</option>
+        <option value="ar">🇸🇦 العربية</option>
+      </select>
+      <button class="theme-toggle" onclick="toggleTheme()" aria-label="Tema değiştir">🌓</button>
+    </div>
+  </header>
+  <main id="activities"></main>
+
+  <script>
+    // Dil başlıkları + aktiviteler
+    const translations = {
+      title: { tr: "TUR VE AKTİVİTELERİMİZ", en: "OUR TOURS & ACTIVITIES", ru: "НАШИ ТУРЫ И АКТИВНОСТИ", ar: "جولاتنا وأنشطتنا" },
+      // WhatsApp buton metni çevirileri
+      waLabel: {
+        tr: "Bilgi ve Rezervasyon için tıklayınız",
+        en: "Tap for Info & Booking",
+        ru: "Нажмите для информации и брони",
+        ar: "اضغط للمعلومات والحجز"
+      },
+      // WhatsApp mesaj şablonu çevirileri (başlık otomatik eklenir)
+      waTemplate: {
+        tr: (name) => `${name} ile ilgili detaylı bilgi alabilir miyim ?`,
+        en: (name) => `Hi! Could I get more details about ${name}?`,
+        ru: (name) => `Здравствуйте! Могу ли я получить подробную информацию о ${name}?`,
+        ar: (name) => `مرحبا! هل يمكنني الحصول على مزيد من التفاصيل عن ${name}؟`
+      },
+      activities: [
+        {
+          image: "paragliding.jpg",
+          link: "https://www.instagram.com/reel/C8bxL4sIajN/?utm_source=ig_web_copy_link&igsh=cWZtcXV0dzFsM2c2",
+          name: { tr: "Yamaç Paraşütü", en: "Paragliding", ru: "Парапланеризм", ar: "الطيران المظلي" },
+          desc: {
+            tr: "Babadağ’ın zirvesinden gökyüzüne süzüldüğünüz an, Ölüdeniz’in nefes kesen manzarası ayaklarınızın altına serilecek. Yamaç paraşütü deneyimi, sadece bir aktivite değil; özgürlük ve heyecanın gökyüzündeki buluşması. Bu unutulmaz yolculukta kalbiniz daha hızlı atacak, ruhunuz özgürleşecek.",
+            en: "Soar from the peak of Babadağ with Ölüdeniz’s breathtaking view beneath you. Paragliding isn't just an activity — it's the ultimate fusion of freedom and adrenaline in the sky. With a professional pilot by your side, you’ll create unforgettable memories high above the coastline.",
+            ru: "Парите с вершины Бабадаг над захватывающим видом Олюдениза. Полёт на параплане — это не просто активность, а слияние свободы и адреналина в небе. С опытным пилотом рядом вы создадите незабываемые воспоминания над побережьем.",
+            ar: "حلّق من قمة باباداغ مع منظر أولودينيز الخلاب تحت قدميك. الطيران المظلي ليس مجرد نشاط، بل مزيج من الحرية والإثارة في السماء. مع طيار محترف بجانبك ستصنع ذكريات لا تُنسى فوق الساحل."
+          },
+          price: "£75 | $100 (not include photo/video)"
+        },
+        {
+          image: "scuba.jpg",
+          link: "https://www.instagram.com/reel/C7wK0y-oacD/?utm_source=ig_web_copy_link&igsh=MWIwMmR1Yjk4b2lkaQ==",
+          name: { tr: "Tüplü Dalış", en: "Scuba Diving", ru: "Дайвинг", ar: "الغوص" },
+          desc: {
+            tr: "Fethiye’nin berrak mavi sularında su altının büyüsüne kapılmaya hazır olun! Tüplü dalış turumuzda rengârenk balıklar ve mercanlar arasında yüzerek bambaşka bir dünyanın kapılarını aralayacaksınız. Denizin altında zaman durur, sadece siz ve doğa kalırsınız.",
+            en: "Dive into Fethiye’s crystal-clear waters and discover the mesmerizing beauty of the underwater world. Swim among colorful fish and coral reefs as you explore a peaceful realm where time slows down. It’s a magical escape beneath the waves.",
+            ru: "Погрузитесь в кристально чистые воды Фетхие и откройте для себя завораживающую красоту подводного мира. Плавайте среди ярких рыб и кораллов в мире, где время будто замирает.",
+            ar: "اغمر نفسك في مياه فتحية الصافية واكتشف جمال عالم الأعماق الآسر. اسبح بين الأسماك الملونة والشعاب المرجانية في عالم يهدأ فيه الزمن."
+          },
+          price: "£45 | $60"
+        },
+        {
+          image: "rafting.jpg",
+          link: "",
+          name: { tr: "Rafting", en: "Rafting", ru: "Рафтинг", ar: "التجديف" },
+          desc: {
+            tr: "Ege’nin serin sularında dalgalarla boğuşurken, hem adrenalini hem de kahkahayı bir arada yaşayacaksınız. Rafting turumuz dostlarınızla unutulmaz bir gün geçirmeniz için birebir. Nehir boyunca süren eğlenceye doğanın eşsiz güzellikleri eşlik edecek.",
+            en: "Ride the waves, splash with friends, and feel the rush on a wild river. Our rafting tour blends adrenaline, laughter, and nature into one unforgettable day. Every rapid brings excitement; every calm stretch offers scenic beauty.",
+            ru: "Преодолевайте пороги, брызгайтесь с друзьями и почувствуйте прилив адреналина на бурной реке. Наш тур по рафтингу сочетает драйв, смех и природу в одном незабываемом дне.",
+            ar: "واجِه التيارات وازدد مرحًا مع الأصدقاء واشعر باندفاع الأدرينالين في النهر. تجمع جولة الرافتينغ بين الإثارة والطبيعة والضحك في يوم لا يُنسى."
+          },
+          price: "£45 | $60"
+        },
+        {
+          image: "jeep.jpg",
+          link: "https://www.instagram.com/reel/C-nKFubIv20/?utm_source=ig_web_copy_link&igsh=N2JvM3M2dTRzeWI3",
+          name: { tr: "Jeep Safari", en: "Jeep Safari", ru: "Джип-сафари", ar: "سفاري الجيب" },
+          desc: {
+            tr: "Tozlu dağ yollarında konvoy halinde ilerlerken su tabancalarıyla yapılan küçük savaşlar bu günü daha da eğlenceli hale getiriyor. Jeep safari turumuzda hem doğayla iç içe olacaksınız hem de bol aksiyonla keyifli vakit geçireceksiniz. Her virajda yeni bir manzara, her durakta yeni bir kahkaha sizi bekliyor.",
+            en: "Kick up dust on mountain trails, splash through streams, and join light-hearted water fights along the way. Our jeep safari blends nature, action, and playful fun — every turn reveals a new view, every stop a new laugh.",
+            ru: "Поднимайте пыль на горных дорогах, пересекайте ручьи и устраивайте весёлые «водные битвы». Джип-сафари — это природа, экшн и много улыбок: каждый поворот открывает новый вид, каждая остановка — новую порцию веселья.",
+            ar: "انطلق على طرق جبلية ترابية، واعبر الجداول وشارك في مبارزات مائية مرحة طوال الطريق. تمزج جولة السفاري بين الطبيعة والحركة والمرح — في كل منعطف مشهد جديد وفي كل محطة ضحكة جديدة."
+          },
+          price: "£20 | $27"
+        },
+        {
+          image: "12islands.jpg",
+          link: "https://www.instagram.com/reel/DIbLyh8olsM/?utm_source=ig_web_copy_link&igsh=emhtYjQ0ZDU1b3Fi",
+          name: { tr: "12 Adalar Tekne Turu", en: "12 Islands Boat Tour", ru: "Тур по 12 островам", ar: "جولة 12 جزيرة بالقارب" },
+          desc: {
+            tr: "Güneşin altında, turkuaz sularda yüzmenin keyfini çıkarırken zamanın nasıl geçtiğini anlamayacaksınız. 12 Adalar tekne turu boyunca gizli koylarda yüzme molaları, teknede müzik eşliğinde dans ve bol bol güneşlenme sizi bekliyor. Hayalinizdeki mavi yolculuğu gerçeğe dönüştürmek için ideal bir rota!",
+            en: "Bask in the sun and swim in turquoise waters on a blissful day at sea. With hidden coves, music on board, and pure relaxation, the 12 Islands tour turns your blue-dream escape into reality.",
+            ru: "Наслаждайтесь солнцем и бирюзовой водой в морском путешествии. Скрытые бухты, музыка на борту и полный релакс — тур по 12 островам воплощает мечту о «голубом побеге».",
+            ar: "استمتع بالشمس والسباحة في المياه الفيروزية طوال يوم بحري هادئ. خلجان مخفية وموسيقى على القارب واسترخاء تام — جولة الجزر الـ12 تحقق حلمك بالهروب إلى الزرقة."
+          },
+          price: "£27 | $37"
+        },
+        {
+          image: "oludeniz.jpg",
+          link: "https://www.instagram.com/reel/C9wu7YNoIRM/?utm_source=ig_web_copy_link&igsh=MWh3ZmNvZHNvaWdlaQ==",
+          name: { tr: "Ölüdeniz Tekne Turu", en: "Ölüdeniz Boat Tour", ru: "Прогулка на лодке по Олюденизу", ar: "جولة قارب أولودينيز" },
+          desc: {
+            tr: "Ölüdeniz’in sakin sularında, doğanın kalbinde huzur dolu bir gün seni bekliyor. Bu turda hem gözlerden uzak saklı koyları keşfedecek hem de masmavi denizde serinlemenin keyfini süreceksin. Sessizlik, deniz ve doğa ile baş başa kalacağınız bu deneyim ruhunu dinlendirecek.",
+            en: "Drift across the calm waters of Ölüdeniz and discover its hidden bays. Surrounded by nature and deep blue sea, this peaceful day tour lets you slow down and simply breathe.",
+            ru: "Плывите по спокойным водам Олюдениза и откройте его скрытые бухты. Наедине с природой и морем вы проведёте умиротворяющий день, чтобы просто перевести дух.",
+            ar: "تجوّل فوق مياه أولودينيز الهادئة واكتشف خلجانها المخفية. وسط الطبيعة والبحر الأزرق، تمنحك هذه الجولة يومًا هادئًا لتبطئ إيقاعك وتتنفس."
+          },
+          price: "£35 | $47"
+        },
+        {
+          image: "bluebays.jpg",
+          link: "https://www.instagram.com/tv/CBSqoxej1JC/?utm_source=ig_web_copy_link&igsh=MTAwanA2ZWJscnFicA==",
+          name: { tr: "Mavi Koylar", en: "Blue Bays", ru: "Голубые бухты", ar: "الخلجان الزرقاء" },
+          desc: {
+            tr: "Adını renginden alan Mavi Koylar’da yüzmek, adeta bir kartpostalın içinde olmak gibi. Tekneyle açıldığımız bu rota boyunca durup yüzebileceğiniz eşsiz koylar, berrak su ve doğa manzaraları ile tatilinizin en huzurlu anlarını yaşarsınız. Güneş, deniz ve mavilik tam burada birleşiyor.",
+            en: "Swimming in the Blue Bays feels like stepping into a postcard. Crystal-clear waters, serene stops, and stunning scenery make this route a calm, soul-refreshing escape.",
+            ru: "Купание в Голубых бухтах — словно попасть на страницу открытки. Чистейшая вода, спокойные стоянки и восхитительные пейзажи дарят душе отдых.",
+            ar: "السباحة في الخلجان الزرقاء تبدو كأنك داخل بطاقة بريدية. مياه صافية ومحطات هادئة ومناظر خلابة تمنح روحك استراحة منعشة."
+          },
+          price: "£30 | $40"
+        },
+        {
+          image: "dalyan.jpg",
+          link: "",
+          name: { tr: "Dalyan Turu (Günlük)", en: "Dalyan Tour (Daily)", ru: "Тур в Дальян (дневной)", ar: "جولة داليان (يومية)" },
+          desc: {
+            tr: "Dalyan turu; tarih, doğa ve eğlenceyi bir araya getiriyor. Kral mezarlarını görüp geçmişe yolculuk yapacak, çamur banyosu ile eğlenecek ve İztuzu Plajı’nda caretta caretta kaplumbağalarıyla tanışacaksınız. Bu çok yönlü tur, her yaştan misafir için unutulmaz bir deneyim sunar.",
+            en: "Dalyan blends history, nature, and fun in one full-day experience: see ancient rock tombs, enjoy a playful mud bath, and meet the famous caretta turtles at İztuzu Beach.",
+            ru: "Дальян объединяет историю, природу и развлечения в одном насыщенном дне: древние скальные гробницы, озорные грязевые ванны и знакомство с черепахами каретта на пляже Изтузу.",
+            ar: "تجمع داليان بين التاريخ والطبيعة والمرح في يوم كامل: قبور صخرية قديمة، حمام طين ممتع، ولقاء سلاحف الكاريتا على شاطئ إزتوزو."
+          },
+          price: "£40 | $54"
+        },
+        {
+          image: "saklikent.jpg",
+          link: "https://www.instagram.com/reel/C7EJ_YUo8Dg/?utm_source=ig_web_copy_link&igsh=MWE2ODBjbDd0NGNjbw==",
+          name: { tr: "Saklıkent Turu (Günlük)", en: "Saklıkent Tour (Daily)", ru: "Тур в Саклыкент (дневной)", ar: "جولة ساكلكنت (يومية)" },
+          desc: {
+            tr: "Saklıkent Kanyonu’nda doğayla iç içe serin bir macera sizi bekliyor. Buz gibi suyla dolu kanyon boyunca yürürken hem eğlenecek hem de sıcak yaz günlerinde ferahlayacaksınız. Fotoğraf tutkunları için eşsiz manzaralar sunan bu tur, doğaseverlerin favorisi olacak.",
+            en: "A refreshing adventure awaits in Saklıkent Canyon. Wade through icy waters, cool off on hot summer days, and capture epic canyon views along the way.",
+            ru: "В каньоне Саклыкент вас ждёт освежающее приключение: ледяная вода, прохлада в жаркий день и впечатляющие виды для ярких фотографий.",
+            ar: "مغامرة منعشة بانتظارك في وادي ساكلكنت: مياه باردة وانتعاش في أيام الصيف الحارة ومناظر أخّاذة تلتقط لها أجمل الصور."
+          },
+          price: "£30 | $40"
+        },
+        {
+          image: "atv.jpg",
+          link: "https://www.instagram.com/reel/DM-YYiRoLS4/?utm_source=ig_web_copy_link&igsh=Ymd3YWwxcGV6MnBw",
+          name: { tr: "ATV Safari", en: "ATV Safari", ru: "Квадро-сафари", ar: "سفاري ATV" },
+          desc: {
+            tr: "Doğanın içinden geçen engebeli yollar, sizi ATV ile unutulmaz bir maceraya çağırıyor. Motorun gücünü hissedeceğiniz bu safari turu boyunca çamur, toprak ve doğayla baş başa kalacaksınız. Adrenalin sevenler için birebir bir deneyim!",
+            en: "Take on rugged trails and feel the power of the engine on an ATV adventure. Mud, dust, and pure excitement — a perfect match for adrenaline lovers.",
+            ru: "Преодолевайте неровные тропы и ощутите мощь двигателя на квадроцикле. Грязь, пыль и чистый драйв — идеальный выбор для любителей адреналина.",
+            ar: "واجه المسارات الوعرة واشعر بقوة المحرك في مغامرة ATV. طين وغبار وإثارة خالصة — التجربة المثالية لعشاق الأدرينالين."
+          },
+          price: "£30(sng)/40(dbl) | $40(sng)/54(dbl)"
+        },
+        {
+          image: "horsetour.jpg",
+          link: "https://www.instagram.com/reel/C4xvIHNPSuj/?utm_source=ig_web_copy_link&igsh=MW42NW0wNDJqMDFuOA==",
+          name: { tr: "At Turu", en: "Horseback Riding", ru: "Верховая прогулка", ar: "جولة ركوب الخيل" },
+          desc: {
+            tr: "Sahilde gün batımında at binmek, huzurun ve romantizmin ta kendisi. Bu turda doğayla iç içe, denizin kıyısında at sırtında ilerlerken zaman adeta yavaşlıyor. Atlarla kuracağınız bağ, bu deneyimi çok daha özel kılacak.",
+            en: "Sunset horseback riding by the sea is pure tranquility and romance. As you trot along the shore, time seems to slow — a soulful connection with nature and your horse.",
+            ru: "Верховая прогулка на закате у моря — это гармония и романтика. Идя по кромке воды, вы почувствуете, как время замедляется, а связь с природой становится особенной.",
+            ar: "ركوب الخيل على الشاطئ وقت الغروب مزيج من السكينة والرومانسية. ومع خطى الحصان على الرمال، يبطؤ الزمن وتصبح اللحظة أكثر قربًا من الطبيعة."
+          },
+          price: "£30 | $40"
+        },
+        {
+          image: "rhodes.jpg",
+          link: "https://www.instagram.com/reel/DMNGxcWIVsn/?utm_source=ig_web_copy_link&igsh=MXgydnZkNWR3d3hqeg==",
+          name: { tr: "Rodos Turu Bileti", en: "Rhodes Tour Ticket", ru: "Билет на тур на Родос", ar: "تذكرة جولة رودس" },
+          desc: {
+            tr: "Feribotla Rodos’a keyifli bir yolculuk yapın ve Orta Çağ dokusunu hâlâ taşıyan sokaklarında keşfe çıkın. Denizin üzerindeki serin meltem, tarihi surlar ve nefes kesen manzaralar bu günü eşsiz kılar.",
+            en: "Sail by ferry to Rhodes and explore its medieval streets and ancient walls. Sea breeze, scenic views, and a day rich with culture make this trip unforgettable.",
+            ru: "Отправьтесь на пароме на Родос и откройте для себя средневековые улочки и древние стены. Морской бриз, виды и насыщенный культурой день — поездка, которую сложно забыть.",
+            ar: "أبحِر بالعبّارة إلى رودس واستكشف شوارعها العتيقة وأسوارها القديمة. نسيم البحر والمناظر الخلابة ويوم حافل بالثقافة يجعل الرحلة لا تُنسى."
+          },
+          price: "£55(same day) | $75(same day)"
+        },
+        {
+          image: "cablecar.jpg",
+          link: "https://www.instagram.com/reel/C5x-qvHvnYj/?utm_source=ig_web_copy_link&igsh=MXZ2ZGkybzR2YzM0dw==",
+          name: { tr: "Teleferik", en: "Cable Car", ru: "Канатная дорога", ar: "التلفريك" },
+          desc: {
+            tr: "Şehrin en yüksek noktalarına rahatça yükselirken ayaklarınızın altındaki manzaraya hayran kalacaksınız. Teleferik yolculuğu, fotoğraf kareleri ve huzur dolu anlar için birebir.",
+            en: "Glide smoothly to the city’s highest points and take in panoramic views beneath your feet. A comfortable ride, perfect photo moments, and a calm escape above the crowds.",
+            ru: "Поднимайтесь плавно к самым высоким точкам города и любуйтесь панорамой под ногами. Комфортная поездка и идеальные кадры — спокойное укрытие над суетой.",
+            ar: "اصعد بسلاسة إلى أعلى نقاط المدينة واستمتع بإطلالات بانورامية تحت قدميك. رحلة مريحة ولحظات تصوير مثالية وهروب هادئ فوق الزحام."
+          },
+          price: "£14 | $19"
+        }
+      ]
+    };
+
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+
+    function setLanguage(lang) {
+      localStorage.setItem('lang', lang);
+      document.getElementById('title').textContent = translations.title[lang];
+      renderActivities(lang);
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    }
+
+    // Belirli dil ve başlıkla WhatsApp linki üretir
+    function buildWhatsAppLink(name, lang) {
+      const phone = "905362271000"; // +90 536 227 1000
+      const msgTemplateFn = translations.waTemplate[lang] || translations.waTemplate.tr;
+      const text = msgTemplateFn(name);
+      return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+    }
+
+    function renderActivities(lang) {
+      const container = document.getElementById('activities');
+      container.innerHTML = '';
+      translations.activities.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const displayName = item.name[lang];
+        const waHref = buildWhatsAppLink(displayName, lang);
+        const waLabel = translations.waLabel[lang];
+
+        const nameHtml = item.link && item.link.trim() !== ''
+          ? `<h3><a href="${item.link}" target="_blank" rel="noopener noreferrer" title="Instagram videosunu aç">${displayName}</a></h3>`
+          : `<h3>${displayName}</h3>`;
+
+        card.innerHTML = `
+          <img src="${item.image}" alt="${displayName}">
+          <div class="card-content">
+            ${nameHtml}
+            <p>${item.desc[lang]}</p>
+            <a class="wa-btn" href="${waHref}" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp ile ${displayName} hakkında bilgi iste">
+              ${waLabel}
+            </a>
+          </div>
+          <div class="price">${item.price}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') document.body.classList.add('dark');
+
+    const savedLang = localStorage.getItem('lang') || 'tr';
+    document.getElementById('language').value = savedLang;
+    setLanguage(savedLang);
+
+    document.getElementById('language').addEventListener('change', (e) => {
+      setLanguage(e.target.value);
+    });
+  </script>
+</body>
+</html>

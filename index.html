@@ -19,7 +19,6 @@
     .card-content h3 a:hover, .card-content h3 a:focus { border-bottom-color: currentColor; outline: none; }
     .price { font-weight: bold; font-size: 1.2rem; color: #c00; }
 
-    /* WhatsApp butonu */
     .wa-btn {
       display: inline-block;
       margin-top: .5rem;
@@ -40,7 +39,7 @@
     body.dark header { background-color: #333; }
     body.dark .card { border-color: #444; }
     body.dark .price { color: #ff8080; }
-    body.dark .wa-btn { color: #fff; } /* koyu modda da okunaklı */
+    body.dark .wa-btn { color: #fff; }
   </style>
   <link rel="manifest" href="manifest.json">
   <script>
@@ -72,17 +71,14 @@
   <main id="activities"></main>
 
   <script>
-    // Dil başlıkları + aktiviteler
     const translations = {
       title: { tr: "TUR VE AKTİVİTELERİMİZ", en: "OUR TOURS & ACTIVITIES", ru: "НАШИ ТУРЫ И АКТИВНОСТИ", ar: "جولاتنا وأنشطتنا" },
-      // WhatsApp buton metni çevirileri
       waLabel: {
         tr: "Bilgi ve Rezervasyon için tıklayınız",
         en: "Tap for Info & Booking",
         ru: "Нажмите для информации и брони",
         ar: "اضغط للمعلومات والحجز"
       },
-      // WhatsApp mesaj şablonu çevirileri (başlık otomatik eklenir)
       waTemplate: {
         tr: (name) => `${name} ile ilgili detaylı bilgi alabilir miyim ?`,
         en: (name) => `Hi! Could I get more details about ${name}?`,
@@ -100,7 +96,7 @@
             ru: "Парите с вершины Бабадаг над захватывающим видом Олюдениза. Полёт на параплане — это не просто активность, а слияние свободы и адреналина в небе. С опытным пилотом рядом вы создадите незабываемые воспоминания над побережьем.",
             ar: "حلّق من قمة باباداغ مع منظر أولودينيز الخلاب تحت قدميك. الطيران المظلي ليس مجرد نشاط، بل مزيج من الحرية والإثارة في السماء. مع طيار محترف بجانبك ستصنع ذكريات لا تُنسى فوق الساحل."
           },
-          price: "£75 | $100 (not include photo/video)"
+          price: "£105 | $140"
         },
         {
           image: "scuba.jpg",
@@ -112,7 +108,7 @@
             ru: "Погрузитесь в кристально чистые воды Фетхие и откройте для себя завораживающую красоту подводного мира. Плавайте среди ярких рыб и кораллов в мире, где время будто замирает.",
             ar: "اغمر نفسك في مياه فتحية الصافية واكتشف جمال عالم الأعماق الآسر. اسبح بين الأسماك الملونة والشعاب المرجانية في عالم يهدأ فيه الزمن."
           },
-          price: "£45 | $60"
+          price: "£50 | $65"
         },
         {
           image: "rafting.jpg",
@@ -124,7 +120,7 @@
             ru: "Преодолевайте пороги, брызгайтесь с друзьями и почувствуйте прилив адреналина на бурной реке. Наш тур по рафтингу сочетает драйв, смех и природу в одном незабываемом дне.",
             ar: "واجِه التيارات وازدد مرحًا مع الأصدقاء واشعر باندفاع الأدرينالين في النهر. تجمع جولة الرافتينغ بين الإثارة والطبيعة والضحك في يوم لا يُنسى."
           },
-          price: "£45 | $60"
+          price: "£40 | $55"
         },
         {
           image: "jeep.jpg",
@@ -136,7 +132,7 @@
             ru: "Поднимайте пыль на горных дорогах, пересекайте ручьи и устраивайте весёлые «водные битвы». Джип-сафари — это природа, экшн и много улыбок: каждый поворот открывает новый вид, каждая остановка — новую порцию веселья.",
             ar: "انطلق على طرق جبلية ترابية، واعبر الجداول وشارك في مبارزات مائية مرحة طوال الطريق. تمزج جولة السفاري بين الطبيعة والحركة والمرح — في كل منعطف مشهد جديد وفي كل محطة ضحكة جديدة."
           },
-          price: "£20 | $27"
+          price: "£25 | $35"
         },
         {
           image: "12islands.jpg",
@@ -148,7 +144,7 @@
             ru: "Наслаждайтесь солнцем и бирюзовой водой в морском путешествии. Скрытые бухты, музыка на борту и полный релакс — тур по 12 островам воплощает мечту о «голубом побеге».",
             ar: "استمتع بالشمس والسباحة في المياه الفيروزية طوال يوم بحري هادئ. خلجان مخفية وموسيقى على القارب واسترخاء تام — جولة الجزر الـ12 تحقق حلمك بالهروب إلى الزرقة."
           },
-          price: "£27 | $37"
+          price: "£30 | $40"
         },
         {
           image: "oludeniz.jpg",
@@ -160,7 +156,7 @@
             ru: "Плывите по спокойным водам Олюдениза и откройте его скрытые бухты. Наедине с природой и морем вы проведёте умиротворяющий день, чтобы просто перевести дух.",
             ar: "تجوّل فوق مياه أولودينيز الهادئة واكتشف خلجانها المخفية. وسط الطبيعة والبحر الأزرق، تمنحك هذه الجولة يومًا هادئًا لتبطئ إيقاعك وتتنفس."
           },
-          price: "£35 | $47"
+          price: "£33 | $45"
         },
         {
           image: "bluebays.jpg",
@@ -184,7 +180,7 @@
             ru: "Дальян объединяет историю, природу и развлечения в одном насыщенном дне: древние скальные гробницы, озорные грязевые ванны и знакомство с черепахами каретта на пляже Изтузу.",
             ar: "تجمع داليان بين التاريخ والطبيعة والمرح في يوم كامل: قبور صخرية قديمة، حمام طين ممتع، ولقاء سلاحف الكاريتا على شاطئ إزتوزو."
           },
-          price: "£40 | $54"
+          price: "£45 | $60"
         },
         {
           image: "saklikent.jpg",
@@ -208,7 +204,7 @@
             ru: "Преодолевайте неровные тропы и ощутите мощь двигателя на квадроцикле. Грязь, пыль и чистый драйв — идеальный выбор для любителей адреналина.",
             ar: "واجه المسارات الوعرة واشعر بقوة المحرك في مغامرة ATV. طين وغبار وإثارة خالصة — التجربة المثالية لعشاق الأدرينالين."
           },
-          price: "£30(sng)/40(dbl) | $40(sng)/54(dbl)"
+          price: "£30(sng)/£40(dbl) | $40(sng)/$54(dbl)"
         },
         {
           image: "horsetour.jpg",
@@ -232,7 +228,7 @@
             ru: "Отправьтесь на пароме на Родос и откройте для себя средневековые улочки и древние стены. Морской бриз, виды и насыщенный культурой день — поездка, которую сложно забыть.",
             ar: "أبحِر بالعبّارة إلى رودس واستكشف شوارعها العتيقة وأسوارها القديمة. نسيم البحر والمناظر الخلابة ويوم حافل بالثقافة يجعل الرحلة لا تُنسى."
           },
-          price: "£55(same day) | $75(same day)"
+          price: "£65(same day) | $88(same day)"
         },
         {
           image: "cablecar.jpg",
@@ -244,7 +240,67 @@
             ru: "Поднимайтесь плавно к самым высоким точкам города и любуйтесь панорамой под ногами. Комфортная поездка и идеальные кадры — спокойное укрытие над суетой.",
             ar: "اصعد بسلاسة إلى أعلى نقاط المدينة واستمتع بإطلالات بانورامية تحت قدميك. رحلة مريحة ولحظات تصوير مثالية وهروب هادئ فوق الزحام."
           },
-          price: "£14 | $19"
+          price: "£15 | $20"
+        },
+        {
+          image: "https://i.ibb.co/xqr4cfqQ/aquapark.jpg",
+          link: "",
+          name: { tr: "Aquapark", en: "Aquapark", ru: "Аквапарк", ar: "الحديقة المائية" },
+          desc: {
+            tr: "Sıcak yaz günlerinde serinlemek ve eğlence dolu bir gün geçirmek isteyenler için aquapark harika bir seçenektir. Su kaydırakları, havuzlar ve aile dostu alanlarla hem çocuklar hem de yetişkinler için keyifli bir deneyim sunar. Gün boyu süren bu eğlence, tatilinize hareket ve neşe katar.",
+            en: "Aquapark is a perfect choice for cooling off and enjoying a fun-filled day during hot summer days. With water slides, pools, and family-friendly areas, it offers a joyful experience for both children and adults. A lively day that adds energy and smiles to your holiday.",
+            ru: "Аквапарк — отличный выбор, чтобы освежиться и весело провести жаркий летний день. Водные горки, бассейны и семейные зоны подарят радость и детям, и взрослым. Это активный день, полный улыбок и отдыха.",
+            ar: "الحديقة المائية خيار رائع للانتعاش وقضاء يوم مليء بالمرح في أيام الصيف الحارة. مع الزحاليق المائية والمسابح والمناطق العائلية، توفر تجربة ممتعة للأطفال والكبار. يوم مليء بالحيوية والابتسامات أثناء عطلتك."
+          },
+          price: "£30 | $40"
+        },
+        {
+          image: "https://i.ibb.co/RkHYNrMn/pirate.jpg",
+          link: "",
+          name: { tr: "Pirate Boat", en: "Pirate Boat", ru: "Пиратский корабль", ar: "قارب القراصنة" },
+          desc: {
+            tr: "Pirate Boat turu; müzik, deniz, yüzme molaları ve eğlenceli atmosferiyle tatilin en renkli günlerinden birini yaşatır. Korsan temalı teknede hem çocuklar hem yetişkinler için keyifli anlar sizi bekler. Güneş, deniz ve eğlenceyi bir arada isteyenler için ideal bir tekne turudur.",
+            en: "The Pirate Boat tour brings together music, sea, swimming stops, and a fun atmosphere for one of the most colorful days of your holiday. On the pirate-themed boat, both children and adults can enjoy cheerful moments. A great choice for those who want sun, sea, and entertainment together.",
+            ru: "Тур на пиратском корабле объединяет музыку, море, остановки для купания и весёлую атмосферу. На тематическом корабле интересно и детям, и взрослым. Отличный выбор для тех, кто хочет солнце, море и развлечения в одном дне.",
+            ar: "تجمع جولة قارب القراصنة بين الموسيقى والبحر ومحطات السباحة وأجواء المرح لتمنحك يومًا مميزًا من عطلتك. على القارب ذي الطابع القراصني، يستمتع الأطفال والكبار بلحظات جميلة. خيار مثالي لمن يريد الشمس والبحر والترفيه معًا."
+          },
+          price: "£35 | $47"
+        },
+        {
+          image: "https://i.ibb.co/yFdgFJ4s/pamukkale.jpg",
+          link: "",
+          name: { tr: "Pamukkale Turu (Günübirlik)", en: "Pamukkale Tour (Daily)", ru: "Тур в Памуккале (дневной)", ar: "جولة باموكالي (يومية)" },
+          desc: {
+            tr: "Pamukkale turu, Türkiye’nin en özel doğal güzelliklerinden birini keşfetmek isteyenler için unutulmaz bir günlük rotadır. Beyaz travertenler, termal sular ve antik Hierapolis kalıntılarıyla tarih ve doğa aynı gün içinde buluşur. Fotoğraf, kültür ve keşif seven misafirler için kaçırılmayacak bir deneyimdir.",
+            en: "Pamukkale Tour is an unforgettable daily route for those who want to discover one of Türkiye’s most unique natural wonders. White travertines, thermal waters, and the ancient ruins of Hierapolis bring nature and history together in one day. A must-see experience for guests who love photography, culture, and discovery.",
+            ru: "Тур в Памуккале — это незабываемый дневной маршрут к одному из самых уникальных природных чудес Турции. Белые травертины, термальные воды и древний Иераполис объединяют природу и историю в один день. Отличный выбор для любителей фото, культуры и открытий.",
+            ar: "جولة باموكالي رحلة يومية لا تُنسى لاكتشاف واحدة من أجمل العجائب الطبيعية في تركيا. الترافرتين الأبيض والمياه الحرارية وآثار هيرابوليس القديمة تجمع بين الطبيعة والتاريخ في يوم واحد. تجربة رائعة لمحبي التصوير والثقافة والاستكشاف."
+          },
+          price: "£45 | $60"
+        },
+        {
+          image: "https://i.ibb.co/Wvfp1ypR/asd.png",
+          link: "",
+          name: { tr: "Fethiye Çarşı & Kayaköy Turu (Günübirlik)", en: "Fethiye Market & Kayaköy Tour (Daily)", ru: "Тур по рынку Фетхие и Каякёй (дневной)", ar: "جولة سوق فتحية وكاياكوي (يومية)" },
+          desc: {
+            tr: "Fethiye Çarşı & Kayaköy turu, bölgenin yerel yaşamını ve tarihi dokusunu aynı gün içinde keşfetmek isteyenler için keyifli bir programdır. Fethiye çarşısında alışveriş ve şehir atmosferini yaşarken, Kayaköy’de taş evler ve geçmişin izleriyle farklı bir dünyaya adım atarsınız. Kültür, alışveriş ve kısa keşifleri sevenler için ideal bir günlük turdur.",
+            en: "Fethiye Market & Kayaköy Tour is a pleasant daily program for guests who want to discover local life and historical atmosphere in the same day. Enjoy shopping and the lively town feel in Fethiye market, then step into a different world among the stone houses and traces of the past in Kayaköy. Ideal for culture, shopping, and short discovery lovers.",
+            ru: "Тур по рынку Фетхие и Каякёй — приятная дневная программа для тех, кто хочет познакомиться с местной жизнью и исторической атмосферой. На рынке Фетхие вас ждёт шопинг и городская атмосфера, а в Каякёй — каменные дома и следы прошлого. Идеально для любителей культуры, покупок и коротких открытий.",
+            ar: "جولة سوق فتحية وكاياكوي برنامج يومي ممتع لمن يرغب في اكتشاف الحياة المحلية والأجواء التاريخية في يوم واحد. تستمتع بالتسوق وأجواء المدينة في سوق فتحية، ثم تنتقل إلى عالم مختلف بين البيوت الحجرية وآثار الماضي في كاياكوي. خيار مثالي لمحبي الثقافة والتسوق والاكتشافات القصيرة."
+          },
+          price: "£25 | $34"
+        },
+        {
+          image: "https://i.ibb.co/nq4MYFPV/speed-boat.jpg",
+          link: "",
+          name: { tr: "Sürat Teknesi", en: "Speed Boat", ru: "Скоростная лодка", ar: "قارب سريع" },
+          desc: {
+            tr: "Sürat teknesi deneyimi, denizde daha özel, hızlı ve özgür bir rota isteyen misafirler için ideal bir seçenektir. Masmavi koylara daha kısa sürede ulaşabilir, denizin ve manzaranın keyfini daha kişisel bir şekilde çıkarabilirsiniz. Heyecan, konfor ve özel deniz deneyimini bir arada sunar.",
+            en: "The Speed Boat experience is ideal for guests who want a more private, fast, and flexible route at sea. Reach beautiful blue bays in less time and enjoy the sea and scenery in a more personal way. It combines excitement, comfort, and a special sea experience.",
+            ru: "Скоростная лодка — отличный вариант для гостей, которые хотят более приватный, быстрый и свободный морской маршрут. Вы сможете быстрее добраться до голубых бухт и насладиться морем и видами в более личной атмосфере. Это сочетание драйва, комфорта и особого морского опыта.",
+            ar: "تجربة القارب السريع مثالية للضيوف الذين يرغبون في مسار بحري أكثر خصوصية وسرعة ومرونة. يمكنك الوصول إلى الخلجان الزرقاء في وقت أقصر والاستمتاع بالبحر والمناظر بطريقة أكثر شخصية. تجمع بين الإثارة والراحة وتجربة بحرية مميزة."
+          },
+          price: "£99 | $134"
         }
       ]
     };
@@ -261,9 +317,8 @@
       document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
     }
 
-    // Belirli dil ve başlıkla WhatsApp linki üretir
     function buildWhatsAppLink(name, lang) {
-      const phone = "905362271000"; // +90 536 227 1000
+      const phone = "905492271009";
       const msgTemplateFn = translations.waTemplate[lang] || translations.waTemplate.tr;
       const text = msgTemplateFn(name);
       return `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
